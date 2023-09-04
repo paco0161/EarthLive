@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extrahead %}
+<link rel="stylesheet" href="{% static 'css/clock.css' %}">
+{% endblock %}
+
+{% block scripts%}
+{{ userClocks|json_script:"userClocks"}}
+<script src="{% static 'clock.js' %}" ></script>
+{% endblock %}
+
+
+{% block content %}
+<br>
+<div class="area">Count: {{ userClocks.fields.clocks | length }} </div>
+
+{% if user.is_authenticated %}
+    {% if userClocks.fields.clocks|length >= 2 %}
+        <div class="grid-container">
+            <div class="grid-clock top-left">
+                <div class="hour-hand hr"></div>
+                <div class="minute-hand mn"></div>
+                <div class="second-hand sc"></div>
+                <span style="--i:1;"><b>1</b></span>
+                <span style="--i:2;"><b>2</b></span>
+                <span style="--i:3;"><b>3</b></span>
+                <span style="--i:4;"><b>4</b></span>
+                <span style="--i:5;"><b>5</b></span>
+                <span style="--i:6;"><b>6</b></span>
+                <span style="--i:7;"><b>7</b></span>
+                <span style="--i:8;"><b>8</b></span>
+                <span style="--i:9;"><b>9</b></span>
+                <span style="--i:10;"><b>10</b></span>
+                <span style="--i:11;"><b>11</b></span>
+                <span style="--i:12;"><b>12</b></span>
+        
+                <div class="digital-time">
+                    <div class="digital-hour">00</div>
+                    <div class="digital-minute">00</div>
+                    <div class="digital-second">00</div>
+                </div>
+        
+                <div class="location">{{userClocks.fields.clocks.0.area}}</div>
+            </div>
+            <div class="grid-clock top-right">
+                <div class="hour-hand hr"></div>
+                <div class="minute-hand mn"></div>
+                <div class="second-hand sc"></div>
+                <span style="--i:1;"><b>1</b></span>
+                <span style="--i:2;"><b>2</b></span>
+                <span style="--i:3;"><b>3</b></span>
+                <span style="--i:4;"><b>4</b></span>
+                <span style="--i:5;"><b>5</b></span>
+                <span style="--i:6;"><b>6</b></span>
+                <span style="--i:7;"><b>7</b></span>
+                <span style="--i:8;"><b>8</b></span>
+                <span style="--i:9;"><b>9</b></span>
+                <span style="--i:10;"><b>10</b></span>
+                <span style="--i:11;"><b>11</b></span>
+                <span style="--i:12;"><b>12</b></span>
+        
+                <div class="digital-time">
+                    <div class="digital-hour">00</div>
+                    <div class="digital-minute">00</div>
+                    <div class="digital-second">00</div>
+                </div>
+        
+                <div class="location">{{userClocks.fields.clocks.1.area}}</div>
+            </div>
+        </div>
+    {% else %}
+        <div class="col-md-5 offset-md-3">
+            <form class="d-flex form" id="addPlaceForm" role="search" method="POST" target="_self">
+                {% csrf_token %}
+                <input class="form-control me-2" type="search" name="clocks" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit" id="addPlaceBtn">Add</button>
+            </form>
+        </div>
+        {% if userClocks.fields.clocks %}
+            <div class="grid-clock middle">
+                <div class="hour-hand hr"></div>
+                <div class="minute-hand mn"></div>
+                <div class="second-hand sc"></div>
+                <span style="--i:1;"><b>1</b></span>
+                <span style="--i:2;"><b>2</b></span>
+                <span style="--i:3;"><b>3</b></span>
+                <span style="--i:4;"><b>4</b></span>
+                <span style="--i:5;"><b>5</b></span>
+                <span style="--i:6;"><b>6</b></span>
+                <span style="--i:7;"><b>7</b></span>
+                <span style="--i:8;"><b>8</b></span>
+                <span style="--i:9;"><b>9</b></span>
+                <span style="--i:10;"><b>10</b></span>
+                <span style="--i:11;"><b>11</b></span>
+                <span style="--i:12;"><b>12</b></span>
+        
+                <div class="digital-time">
+                    <div class="digital-hour">00</div>
+                    <div class="digital-minute">00</div>
+                    <div class="digital-second">00</div>
+                </div>
+        
+                <div class="location">{{userClocks.fields.clocks.0.area}}</div>
+            </div>
+        {% endif %}
+    {% endif %}
+{% endif %}
+{% endblock %}

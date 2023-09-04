@@ -1,0 +1,5 @@
+#Ignore all files inside virtual environment directory
+virt/
+
+#Ignore
+.vscode/
