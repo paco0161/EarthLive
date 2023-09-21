@@ -1,3 +1,4 @@
+from typing import Any
 from django.db import models
 
 # Create your models here.
@@ -18,19 +19,23 @@ class UserClocks(models.Model):
     clockAddress_2_TimeZone = models.CharField(max_length=30, null=True)
     clockAddress_2_UTC_Offset = models.CharField(max_length=10, null=True)
 
-    @classmethod
-    def field_exists(cls, field):
-        try:
-            cls._meta.get_field(field)
-            return True
-        except models.FieldDoesNotExist:
-            return False
+    def getUserClocks(request):
+        return UserClocks.objects.filter(username=request.user.get_username())
     
-    def __str__(self):
-        return f"{self.clockAddress_1_UTC_Offset} {self.clockAddress_2_UTC_Offset}"
+    def getClockList(request):
+        return UserClocks.getUserClocks(request)[0].clocks if UserClocks.getUserClocks(request).count() >= 1 else []
     
+    def addClock(request, timeZoneDict, clock_list):  
+        if timeZoneDict not in clock_list:
+            clock_list.append(timeZoneDict)
+            obj, created = UserClocks.objects.update_or_create(username=request.user.get_username(), defaults={"clocks":clock_list})
+            return obj
+
 
 class TimeZones(models.Model):
     continent =  models.CharField(max_length=50, null=True)
     area = models.CharField(max_length=50, blank=True)
-    timezone = models.CharField(max_length=50, unique=True)
+    timeZone = models.CharField(max_length=50, unique=True)
+
+    def getTimeZonesDict(input):
+        return TimeZones.objects.filter(area__icontains=input).values('timeZone', 'area')[0]

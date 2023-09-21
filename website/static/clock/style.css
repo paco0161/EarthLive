@@ -6,24 +6,23 @@
 }
 
 .grid-container {
-    display: grid;
+    display: flex;
     position: relative;
-    grid-template-columns: auto auto;
-    grid-gap: 600px;
+    max-width: 100%;
     color: #444;
-    justify-content: center;
+    width: 100%;
+    justify-content: space-around;
     align-items: center;
-    margin-top: 100px;
+    margin-top: 10%;
 }
 
 .grid-clock {
     position: relative;
     width: 400px;
     height: 400px;
-    margin-top: 200px;
     background: #fff;
     border-radius: 50%;
-    box-shadow: 10px 50px 70px rgba(0,0,0,0.25),
+    box-shadow:  10px 50px 70px rgba(0,0,0,0.25),
     inset 5px 5px 10px rgba(0,0,0,0.5),
     inset 5px 5px 20px rgba(255,255,255,0.2),
     inset -5px -5px 15px rgba(0,0,0,0.75);
@@ -166,5 +165,13 @@
     text-align: center;
     justify-content: center;
     align-items: center;
-    margin-top: 100px;
+    margin-top: 50px;
 }
+
+/* .fs-4 {
+    font-size: calc(1.275rem + .3vw);
+} */
+
+/* .location .bi-box-arrow-down-right {
+    font-weight: bold;
+} */

@@ -32,14 +32,7 @@ class SignUpForm(UserCreationForm):
         self.fields['password2'].help_text = '<span class="form-text text-muted"><small>Enter the same password as before, for verification.</small></span>'
 
 class AddUserClocksForm(forms.Form):
-    clocks = forms.CharField(max_length=200)
+    clock = forms.CharField(max_length=200)
     
     class Meta:
         model = UserClocks
-
-    def get_json(self):
-        clocks = self.cleaned_data['clocks']
-        try:
-            return json.loads(clocks)
-        except:
-            raise forms.ValidationError("Invalid Json data in clocks")

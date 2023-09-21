@@ -8,7 +8,7 @@ const digitalMn = document.getElementsByClassName('digital-minute');
 const digitalSc = document.getElementsByClassName('digital-second');
 
 const data_dict = JSON.parse(document.getElementById('userClocks').textContent);
-const savedTmeZones = data_dict != '' ? [data_dict["fields"]["clocks"][0]["timezone"], data_dict["fields"]["clocks"][1]["timezone"]] : null;
+const savedTmeZones = getSavedTimeZones(data_dict);
 
 setInterval(function() {
     if (savedTmeZones !== null) {
@@ -30,18 +30,38 @@ setInterval(function() {
     }
 }, 1000)
 
-// var addedPlaces = [];
-// const addPlacesBtn = document.getElementById('addPlacesBtn');
-// const addTimeZonesForm = document.getElementById('addTimeZonesForm');
+const searchBarElement = document.getElementById("addPlaceForm");
 
-// addPlacesBtn.addEventListener("click", function(event) {
-//     let place = this.previousElementSibling.value;
-//     addedPlaces.push(place);
-//     if (addedPlaces.length <= 1) {
-//         event.preventDefault();
-//     } else {
-//         document.getElementsByName('addPlaces[]').value = addedPlaces;
-//         console.log(document.getElementsByName('addPlaces[]').value);
-//         return true;
-//     }
-// });
+if (data_dict["fields"]["clocks"].length >= 2) {
+    searchBarElement.className += "d-none";
+} else {
+    searchBarElement.className.replace('d-none', '');
+}
+
+function getSavedTimeZones(data_dict) {
+    if (data_dict == '') {
+        return null;
+    }
+    return data_dict["fields"]["clocks"].map(c => c["timeZone"]);
+}
+
+
+
+
+
+function filterTimeZones(timeZonesList) {
+    console.log(timeZonesList)
+}
+
+
+function updateLocation(btnId) {
+    // console.log(btnId);
+    // var currentLocation = document.getElementById(btnId).parentElement.textContent;
+    // console.log('currentLocation:' + currentLocation);
+    // // var currentLocation2 = document.getElementById(btnId).parentElement.innerHTML;
+    // // console.log('currentLocation2:' + currentLocation2);
+    // var searchBarElementCopy = searchBarElement.cloneNode(false);
+    // searchBarElementCopy.id = 'updateLocationForm' + currentLocation;
+    // const currentBtn = document.getElementById(btnId).parentNode;
+    // currentBtn.replaceWith(searchBarElementCopy);
+}
