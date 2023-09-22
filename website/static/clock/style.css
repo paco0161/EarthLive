@@ -13,7 +13,7 @@
     width: 100%;
     justify-content: space-around;
     align-items: center;
-    margin-top: 10%;
+    margin-top: 8%;
 }
 
 .grid-clock {
@@ -42,7 +42,7 @@
     border-radius: 50%;
 }
 
-.grid-clock span{
+.grid-clock span {
     position: absolute;
     inset: 8px;
     color: #444;
@@ -56,52 +56,48 @@
     transform: rotate(calc(-30deg * var(--i)));
 }
 
-.hour-hand, .hr{
+.hour-hand,
+.minute-hand,
+.second-hand {
     width: 1px;
-    height: 55%;
-}
-
-.minute-hand, .mn{
-    width: 1px;
-    height: 90%;
-}
-
-.second-hand, .sc{
-    width: 1px;
-    height: 90%;
-}
-
-.hr, .mn, .sc{
     position: absolute;
     display: flex;
     justify-content: center;
 }
 
-.hr::before {
+.hour-hand {
+    height: 55%;
+}
+
+.minute-hand,
+.second-hand {
+    height: 90%
+}
+
+.hour-hand::before,
+.minute-hand::before,
+.second-hand::before {
     content: '';
-    width: 5px;
     height: 50%;
     position: absolute;
+}
+
+.hour-hand::before {
+    width: 5px;
     background: #151517;
     z-index: 10;
     border-radius: 10px 10px 6px 6px;
 }
 
-.mn::before {
-    content: '';
+.minute-hand::before {
     width: 4px;
-    height: 50%;
-    position: absolute;
     background: #151517;
     z-index: 11;
     border-radius: 10px 10px 6px 6px;
 }
 
-.sc::before {
-    content: '';
+.second-hand::before {
     width: 1px;
-    height: 50%;
-    position: absolute;
     z-index: 12;
     background: #ec9b24;
 }
@@ -144,19 +140,10 @@
 }
 
 .location {
-    flex-basis: 100%;
     text-align: center;
     font-size: 1.5em;
     margin-top: 20px;
     font-weight: bold;
-}
-
-.location div {
-    position: relative;
-    text-align: center;
-    width: 60px;
-    font-weight: 600;
-    color: #151517;
 }
 
 .form {
@@ -167,11 +154,3 @@
     align-items: center;
     margin-top: 50px;
 }
-
-/* .fs-4 {
-    font-size: calc(1.275rem + .3vw);
-} */
-
-/* .location .bi-box-arrow-down-right {
-    font-weight: bold;
-} */
