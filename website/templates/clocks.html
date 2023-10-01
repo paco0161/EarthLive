@@ -18,9 +18,9 @@
 {% if user.is_authenticated %}
     {% with clocks=userClocks.fields.clocks locationsCount=userClocks.fields.clocks|length %}
         <div class="col-md-4 offset-md-4">
-            <form class="d-flex form " id="addPlaceForm" role="search" method="POST" target="_self">
+            <form class="d-flex form" id="addPlaceForm" role="search" method="POST" target="_self">
                 {% csrf_token %}
-                <input class="form-control me-2" onkeypress="filterTimeZones(timeZonesList)" type="search" name="clock" placeholder="Search.." aria-label="Search">
+                <input class="form-control me-2" onkeypress="filterTimeZones(timeZonesList)" type="search" name="clock" id="add-location-input" placeholder="Search.." aria-label="Search">
                 <button class="btn btn-outline-success" type="submit" id="addPlaceBtn">Add</button>
             </form>
         </div>
@@ -30,18 +30,18 @@
                     <div class="hour-hand"></div>
                     <div class="minute-hand"></div>
                     <div class="second-hand"></div>
-                    <span style="--i:1;"><b>1</b></span>
-                    <span style="--i:2;"><b>2</b></span>
-                    <span style="--i:3;"><b>3</b></span>
-                    <span style="--i:4;"><b>4</b></span>
-                    <span style="--i:5;"><b>5</b></span>
-                    <span style="--i:6;"><b>6</b></span>
-                    <span style="--i:7;"><b>7</b></span>
-                    <span style="--i:8;"><b>8</b></span>
-                    <span style="--i:9;"><b>9</b></span>
-                    <span style="--i:10;"><b>10</b></span>
-                    <span style="--i:11;"><b>11</b></span>
-                    <span style="--i:12;"><b>12</b></span>
+                    <span class="hourNumber"><b>1</b></span>
+                    <span class="hourNumber"><b>2</b></span>
+                    <span class="hourNumber"><b>3</b></span>
+                    <span class="hourNumber"><b>4</b></span>
+                    <span class="hourNumber"><b>5</b></span>
+                    <span class="hourNumber"><b>6</b></span>
+                    <span class="hourNumber"><b>7</b></span>
+                    <span class="hourNumber"><b>8</b></span>
+                    <span class="hourNumber"><b>9</b></span>
+                    <span class="hourNumber"><b>10</b></span>
+                    <span class="hourNumber"><b>11</b></span>
+                    <span class="hourNumber"><b>12</b></span>
             
                     <div class="digital-time">
                         <div class="digital-hour">00</div>
@@ -50,7 +50,7 @@
                     </div>
             
                     <div class="location">{{clock.area}}
-                        <button type="button" class="btn" id="update-location-btn" onclick="updateLocation(this.id)">
+                        <button type="button" class="btn" id="btn-{{clock.area}}" onclick="updateLocation(this.id)">
                             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-box-arrow-down-right" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M8.636 12.5a.5.5 0 0 1-.5.5H1.5A1.5 1.5 0 0 1 0 11.5v-10A1.5 1.5 0 0 1 1.5 0h10A1.5 1.5 0 0 1 13 1.5v6.636a.5.5 0 0 1-1 0V1.5a.5.5 0 0 0-.5-.5h-10a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h6.636a.5.5 0 0 1 .5.5z"></path>
                                 <path fill-rule="evenodd" d="M16 15.5a.5.5 0 0 1-.5.5h-5a.5.5 0 0 1 0-1h3.793L6.146 6.854a.5.5 0 1 1 .708-.708L15 14.293V10.5a.5.5 0 0 1 1 0v5z"></path>

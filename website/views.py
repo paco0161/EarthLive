@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .forms import SignUpForm, AddUserClocksForm
+from .forms import SignUpForm, AddUserClocksForm, UpdateUserClocksForm
 from .models import UserClocks, TimeZones
 from django.core import serializers
 import json
@@ -30,11 +30,17 @@ def home(request):
 
 def showUserClocks(request):
     if (request.user.is_authenticated):
-        if request.method == "POST":
+        if request.method == "POST" and AddUserClocksForm(request.POST).is_valid():
             form = AddUserClocksForm(request.POST)
             if form.is_valid():
-                userClocks = UserClocks.addClock(request, TimeZones.getTimeZonesDict(input=form.cleaned_data["clock"]), UserClocks.getClockList(request=request))
+                userClocks = UserClocks.addClock(request, TimeZones.getTimeZonesDict(form.cleaned_data["clock"]), UserClocks.getClockList(request=request))
                 userClocksJson = json.loads(serializers.serialize("json", [userClocks], fields=["clocks"]))[0]
+                return render(request, 'clocks.html', {'userClocks': userClocksJson})
+        elif request.method == "POST" and UpdateUserClocksForm(request.POST).is_valid():
+            form = UpdateUserClocksForm(request.POST)
+            if form.is_valid():
+                UserClocks.updateClock(request, TimeZones.getTimeZonesDict(form.cleaned_data["originalLocation"]), TimeZones.getTimeZonesDict(form.cleaned_data["updateClock"]))
+                userClocksJson = json.loads(serializers.serialize("json", userClocks, fields=["clocks"]))[0]
                 return render(request, 'clocks.html', {'userClocks': userClocksJson})
         else:
             userClocks = UserClocks.getUserClocks(request=request)

@@ -25,12 +25,22 @@ class UserClocks(models.Model):
     def getClockList(request):
         return UserClocks.getUserClocks(request)[0].clocks if UserClocks.getUserClocks(request).count() >= 1 else []
     
-    def addClock(request, timeZoneDict, clock_list):  
-        if timeZoneDict not in clock_list:
-            clock_list.append(timeZoneDict)
-            obj, created = UserClocks.objects.update_or_create(username=request.user.get_username(), defaults={"clocks":clock_list})
+    def addClock(request, timeZone, currentClockList):  
+        if timeZone not in currentClockList:
+            currentClockList.append(timeZone)
+            obj, created = UserClocks.objects.update_or_create(username=request.user.get_username(), defaults={"clocks":currentClockList})
             return obj
+        
+    def updateClock(request, originalTimeZone, updateTo):
+        print(UserClocks.getUserClocks(request).values('clocks'))
+        clockList = list(UserClocks.getUserClocks(request).values('clocks'))[0]['clocks']
+        
+        # for clock in oriignalList:
+        #     if clock == originalTimeZone:
+        #         clock.update(updateTo)
+        
 
+        
 
 class TimeZones(models.Model):
     continent =  models.CharField(max_length=50, null=True)
