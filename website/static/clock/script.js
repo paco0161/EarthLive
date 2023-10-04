@@ -59,20 +59,21 @@ function updateLocation(btnId) {
     searchBarElement.classList.remove('d-none');
     const updateLocationForm = searchBarElement.cloneNode(true);
     document.getElementById(btnId).parentElement.replaceWith(updateLocationForm);
-    configUpdateLocationForm(updateLocationForm, btnId.replace('btn-', ''));
+    const btnInfo = btnId.split('-');
+    configUpdateLocationForm(updateLocationForm, btnInfo[1], btnInfo[2]);
     if (!searchBarDisplay) {
         searchBarElement.className += ' d-none';
     }
 }
 
-function configUpdateLocationForm(form, originalLocation) {
+function configUpdateLocationForm(form, position, originalLocation) {
     form.id = 'update-location-form-' + originalLocation;
 
-    let originalInput = document.createElement('input');
-    originalInput.setAttribute('name', 'originalLocation');
-    originalInput.setAttribute('value', originalLocation);
-    originalInput.setAttribute('type', 'hidden');
-    form.appendChild(originalInput);
+    let btnPosition = document.createElement('input');
+    btnPosition.setAttribute('name', 'position');
+    btnPosition.setAttribute('value', position);
+    btnPosition.setAttribute('type', 'hidden');
+    form.appendChild(btnPosition);
 
     let input = form.querySelector('#add-location-input');
     input.setAttribute('name', 'updateClock');

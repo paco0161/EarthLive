@@ -38,9 +38,8 @@ def showUserClocks(request):
         elif request.method == "POST" and UpdateUserClocksForm(request.POST).is_valid():
             form = UpdateUserClocksForm(request.POST)
             if form.is_valid():
-                UserClocks.updateClock(request, TimeZones.getTimeZonesDict(form.cleaned_data["originalLocation"]), TimeZones.getTimeZonesDict(form.cleaned_data["updateClock"]))
-                userClocksJson = json.loads(serializers.serialize("json", userClocks, fields=["clocks"]))[0]
-                return render(request, 'clocks.html', {'userClocks': userClocksJson})
+                UserClocks.updateClock(request, int(form.cleaned_data["position"]), TimeZones.getTimeZonesDict(form.cleaned_data["updateClock"]))
+                return redirect('showUserClocks')
         else:
             userClocks = UserClocks.getUserClocks(request=request)
             timeZonesListJson = json.loads(serializers.serialize("json", TimeZones.objects.all(), fields=["area"]))

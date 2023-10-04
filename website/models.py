@@ -31,10 +31,11 @@ class UserClocks(models.Model):
             obj, created = UserClocks.objects.update_or_create(username=request.user.get_username(), defaults={"clocks":currentClockList})
             return obj
         
-    def updateClock(request, originalTimeZone, updateTo):
-        print(UserClocks.getUserClocks(request).values('clocks'))
-        clockList = list(UserClocks.getUserClocks(request).values('clocks'))[0]['clocks']
-        
+    def updateClock(request, position, updateTo):
+        currentList = UserClocks.getUserClocks(request).values('clocks')[0]['clocks']
+        currentList[position]=updateTo
+        print(currentList)
+        UserClocks.objects.filter(username=request.user.get_username()).update(clocks=currentList)
         # for clock in oriignalList:
         #     if clock == originalTimeZone:
         #         clock.update(updateTo)
