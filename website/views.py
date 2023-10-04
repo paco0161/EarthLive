@@ -5,7 +5,6 @@ from .forms import SignUpForm, AddUserClocksForm, UpdateUserClocksForm
 from .models import UserClocks, TimeZones
 from django.core import serializers
 import json
-import requests
 
 # Create your views here.
 def home(request):
