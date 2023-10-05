@@ -83,3 +83,7 @@ function configUpdateLocationForm(form, position, originalLocation) {
     btn.textContent = 'Update';
     btn.id = 'update-location-btn-' + originalLocation;
 }
+
+function deleteLocation(btnId) {
+    console.log(btnId)
+}

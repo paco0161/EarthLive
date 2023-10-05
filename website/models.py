@@ -36,9 +36,6 @@ class UserClocks(models.Model):
         currentList[position]=updateTo
         print(currentList)
         UserClocks.objects.filter(username=request.user.get_username()).update(clocks=currentList)
-        # for clock in oriignalList:
-        #     if clock == originalTimeZone:
-        #         clock.update(updateTo)
         
 
         

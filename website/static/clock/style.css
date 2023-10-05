@@ -108,12 +108,13 @@
     display: flex;
     font-size: 1.5em;
     margin-top: 450px;
+    width: 80%;
 }
 
 .digital-time div {
     position: relative;
     text-align: center;
-    width: 60px;
+    width: 80%;
     font-weight: 600;
     color: #151517;
 }
@@ -144,6 +145,7 @@
     font-size: 1.5em;
     margin-top: 20px;
     font-weight: bold;
+    height: 100%;
 }
 
 .form {
@@ -153,4 +155,10 @@
     justify-content: center;
     align-items: center;
     margin-top: 50px;
+}
+
+.deleteBtn {
+    position: relative;
+    left: 40%;
+    bottom: 130%;
 }
