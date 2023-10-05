@@ -146,6 +146,7 @@
     margin-top: 20px;
     font-weight: bold;
     height: 100%;
+    width: 100%;
 }
 
 .form {
@@ -157,8 +158,14 @@
     margin-top: 50px;
 }
 
-.deleteBtn {
+.updateBtn {
     position: relative;
     left: 40%;
-    bottom: 130%;
+    bottom: 100%;
+}
+
+.deleteBtn {
+    position: relative;
+    left: 50%;
+    bottom: 230%;
 }
