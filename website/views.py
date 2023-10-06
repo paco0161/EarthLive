@@ -37,7 +37,7 @@ def showUserClocks(request):
                 return render(request, 'clocks.html', {'userClocks': userClocksJson})
         elif request.method == "POST" and UpdateUserClocksForm(request.POST).is_valid():
             form = UpdateUserClocksForm(request.POST)
-            if form.is_valid():
+            if form.is_valid() and form['deletePosition'] is None:
                 UserClocks.updateClock(request, int(form.cleaned_data["position"]), TimeZones.getTimeZonesDict(form.cleaned_data["updateClock"]))
                 return redirect('showUserClocks')
         else:

@@ -38,8 +38,6 @@ class UserClocks(models.Model):
         UserClocks.objects.filter(username=request.user.get_username()).update(clocks=currentList)
         
 
-        
-
 class TimeZones(models.Model):
     continent =  models.CharField(max_length=50, null=True)
     area = models.CharField(max_length=50, blank=True)

@@ -24,45 +24,56 @@
                 <button class="btn btn-outline-success" type="submit" id="addPlaceBtn">Add</button>
             </form>
         </div>
-        <div class="grid-container">
+        <div class="locations-container">
             {% for clock in clocks %}
-                <div class="grid-clock">
-                    <div class="hour-hand"></div>
-                    <div class="minute-hand"></div>
-                    <div class="second-hand"></div>
-                    <span class="hourNumber"><b>1</b></span>
-                    <span class="hourNumber"><b>2</b></span>
-                    <span class="hourNumber"><b>3</b></span>
-                    <span class="hourNumber"><b>4</b></span>
-                    <span class="hourNumber"><b>5</b></span>
-                    <span class="hourNumber"><b>6</b></span>
-                    <span class="hourNumber"><b>7</b></span>
-                    <span class="hourNumber"><b>8</b></span>
-                    <span class="hourNumber"><b>9</b></span>
-                    <span class="hourNumber"><b>10</b></span>
-                    <span class="hourNumber"><b>11</b></span>
-                    <span class="hourNumber"><b>12</b></span>
-            
-                    <div class="digital-time">
-                        <div class="digital-hour">00</div>
-                        <div class="digital-minute">00</div>
-                        <div class="digital-second">00</div>
+                <div class="location">
+                    <div>
+                        <div class="analog-clock">
+                            <div class="hour-hand"></div>
+                            <div class="minute-hand"></div>
+                            <div class="second-hand"></div>
+                            <span class="hourNumber"><b>1</b></span>
+                            <span class="hourNumber"><b>2</b></span>
+                            <span class="hourNumber"><b>3</b></span>
+                            <span class="hourNumber"><b>4</b></span>
+                            <span class="hourNumber"><b>5</b></span>
+                            <span class="hourNumber"><b>6</b></span>
+                            <span class="hourNumber"><b>7</b></span>
+                            <span class="hourNumber"><b>8</b></span>
+                            <span class="hourNumber"><b>9</b></span>
+                            <span class="hourNumber"><b>10</b></span>
+                            <span class="hourNumber"><b>11</b></span>
+                            <span class="hourNumber"><b>12</b></span>
+                        </div>
+                        <div class="location-info">
+                            <div class="digital-time">
+                                <div class="digital-hour">00</div>
+                                <div class="digital-minute">00</div>
+                                <div class="digital-second">00</div>
+                            </div>
+                    
+                            <div class="area">
+                                <div class="area-name">{{clock.area}}
+                                </div>
+                                <button type="button" class="btn updateBtn" id="updateBtn-{{forloop.counter0}}-{{clock.area}}" onclick="updateLocation(this.id)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-box-arrow-down-right" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M8.636 12.5a.5.5 0 0 1-.5.5H1.5A1.5 1.5 0 0 1 0 11.5v-10A1.5 1.5 0 0 1 1.5 0h10A1.5 1.5 0 0 1 13 1.5v6.636a.5.5 0 0 1-1 0V1.5a.5.5 0 0 0-.5-.5h-10a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h6.636a.5.5 0 0 1 .5.5z"></path>
+                                        <path fill-rule="evenodd" d="M16 15.5a.5.5 0 0 1-.5.5h-5a.5.5 0 0 1 0-1h3.793L6.146 6.854a.5.5 0 1 1 .708-.708L15 14.293V10.5a.5.5 0 0 1 1 0v5z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
                     </div>
-            
-                    <div class="location">{{clock.area}}</div>
-                    <button type="button" class="btn updateBtn" id="updateBtn-{{forloop.counter0}}-{{clock.area}}" onclick="updateLocation(this.id)">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-box-arrow-down-right" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M8.636 12.5a.5.5 0 0 1-.5.5H1.5A1.5 1.5 0 0 1 0 11.5v-10A1.5 1.5 0 0 1 1.5 0h10A1.5 1.5 0 0 1 13 1.5v6.636a.5.5 0 0 1-1 0V1.5a.5.5 0 0 0-.5-.5h-10a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h6.636a.5.5 0 0 1 .5.5z"></path>
-                            <path fill-rule="evenodd" d="M16 15.5a.5.5 0 0 1-.5.5h-5a.5.5 0 0 1 0-1h3.793L6.146 6.854a.5.5 0 1 1 .708-.708L15 14.293V10.5a.5.5 0 0 1 1 0v5z"></path>
-                        </svg>
-                    </button>
-                    <button type="button" class="btn deleteBtn" id="deleteBtn-{{forloop.counter0}}-{{clock.area}}" onclick="deleteLocation(this.id)">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-x-square" viewBox="0 0 16 16">
-                            <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-                        </svg>
-                    </button>
+                    <form method="POST" target="_self">
+                        <button type="submit" class="btn deleteBtn" name="deletePosition" value="{{forloop.counter0}}" id="deleteBtn-{{forloop.counter0}}-{{clock.area}}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-x-square" viewBox="0 0 16 16">
+                                <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                            </svg>
+                        </button>
+                    </form>
                 </div>
+
             {% endfor %}
         </div>
     {% endwith %}

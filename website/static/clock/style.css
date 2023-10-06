@@ -5,7 +5,11 @@
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-.grid-container {
+:root {
+    --location-size: 400px;
+}
+
+.locations-container {
     display: flex;
     position: relative;
     max-width: 100%;
@@ -16,23 +20,26 @@
     margin-top: 8%;
 }
 
-.grid-clock {
+.location {
+    display: flex;
+}
+
+.analog-clock {
     position: relative;
-    width: 400px;
-    height: 400px;
+    width: var(--location-size);
+    height: var(--location-size);
     background: #fff;
     border-radius: 50%;
-    box-shadow:  10px 50px 70px rgba(0,0,0,0.25),
+    box-shadow:  10px -10px 70px rgba(0,0,0,0.25),
     inset 5px 5px 10px rgba(0,0,0,0.5),
     inset 5px 5px 20px rgba(255,255,255,0.2),
     inset -5px -5px 15px rgba(0,0,0,0.75);
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
 }
 
-.grid-clock::before {
+.analog-clock::before {
     content: '';
     position: absolute;
     width: 3px;
@@ -42,7 +49,7 @@
     border-radius: 50%;
 }
 
-.grid-clock span {
+.analog-clock span {
     position: absolute;
     inset: 8px;
     color: #444;
@@ -50,7 +57,7 @@
     transform: rotate(calc(30deg * var(--i)));
 }
 
-.grid-clock b {
+.analog-clock b {
     opacity: 0.75;
     display: inline-block;
     transform: rotate(calc(-30deg * var(--i)));
@@ -102,13 +109,21 @@
     background: #ec9b24;
 }
 
+.location-info {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5%;
+}
+
 .digital-time {
     color: #151517;
     position: relative;
     display: flex;
     font-size: 1.5em;
-    margin-top: 450px;
-    width: 80%;
+    width: 40%;
 }
 
 .digital-time div {
@@ -140,13 +155,19 @@
     }
 }
 
-.location {
+.area {
     text-align: center;
     font-size: 1.5em;
-    margin-top: 20px;
     font-weight: bold;
     height: 100%;
     width: 100%;
+    margin-top: 2.5%;
+    display: flex;
+    justify-content: center;
+}
+
+.area-name {
+    padding-left: 12px;
 }
 
 .form {
@@ -158,14 +179,7 @@
     margin-top: 50px;
 }
 
-.updateBtn {
-    position: relative;
-    left: 40%;
-    bottom: 100%;
-}
-
 .deleteBtn {
-    position: relative;
-    left: 50%;
-    bottom: 230%;
+    align-self: flex-start;
+    height: 100%;
 }
