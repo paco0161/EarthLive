@@ -39,8 +39,7 @@ class AddUserClocksForm(forms.Form):
 
 class UpdateUserClocksForm(forms.Form):
     position = forms.CharField(max_length=200)
-    updateClock = forms.CharField(max_length=200)
-    deletePosition = forms.CharField(max_length=200)
-    
+    updateClock = forms.CharField(max_length=200, required=False)
+   
     class Meta:
         model = UserClocks

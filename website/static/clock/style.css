@@ -6,7 +6,8 @@
 }
 
 :root {
-    --location-size: 400px;
+    --main-location-size: 400px;
+    --main-margin-top: 8%;
 }
 
 .locations-container {
@@ -17,7 +18,7 @@
     width: 100%;
     justify-content: space-around;
     align-items: center;
-    margin-top: 8%;
+    margin-top: var(--main-margin-top);
 }
 
 .location {
@@ -26,8 +27,8 @@
 
 .analog-clock {
     position: relative;
-    width: var(--location-size);
-    height: var(--location-size);
+    width: var(--main-location-size);
+    height: var(--main-location-size);
     background: #fff;
     border-radius: 50%;
     box-shadow:  10px -10px 70px rgba(0,0,0,0.25),
@@ -115,7 +116,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 5%;
+    margin-top: var(--main-margin-top);
 }
 
 .digital-time {
@@ -123,7 +124,7 @@
     position: relative;
     display: flex;
     font-size: 1.5em;
-    width: 40%;
+    width: 50%;
 }
 
 .digital-time div {
@@ -161,25 +162,11 @@
     font-weight: bold;
     height: 100%;
     width: 100%;
-    margin-top: 2.5%;
+    margin-top: calc(var(--main-margin-top)/2);
     display: flex;
     justify-content: center;
 }
 
 .area-name {
     padding-left: 12px;
-}
-
-.form {
-    display: flex;
-    position: relative;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    margin-top: 50px;
-}
-
-.deleteBtn {
-    align-self: flex-start;
-    height: 100%;
 }

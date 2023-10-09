@@ -7,7 +7,7 @@
 
 {% block scripts%}
 {{ userClocks|json_script:"userClocks"}}
-{{ timeZonesList|json_script:"timeZonesList"}}
+{{ timeZones|json_script:"timeZones"}}
 <script src="{% static 'clock/script.js' %}" ></script>
 {% endblock %}
 
@@ -17,12 +17,24 @@
 
 {% if user.is_authenticated %}
     {% with clocks=userClocks.fields.clocks count=userClocks.fields.clocks|length %}
+        <br>
         <div class="col-md-4 offset-md-4">
             <form class="d-flex form" id="addPlaceForm" role="search" method="POST" target="_self">
                 {% csrf_token %}
-                <input class="form-control me-2" onkeypress="filterTimeZones(timeZonesList)" type="search" name="clock" id="add-location-input" placeholder="Search.." aria-label="Search">
-                <button class="btn btn-outline-success" type="submit" id="addPlaceBtn">Add</button>
+                    <input class="form-control" onkeyup="filterTimeZones(this.id)" type="search" name="clock" id="input-add-location" placeholder="Search.." aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit" id="addPlaceBtn">Add</button>
             </form>
+            <ul>
+                <li><a href="#">Adele</a></li>
+                <li><a href="#">Agnes</a></li>
+
+                <li><a href="#">Billy</a></li>
+                <li><a href="#">Bob</a></li>
+
+                <li><a href="#">Calvin</a></li>
+                <li><a href="#">Christina</a></li>
+                <li><a href="#">Cindy</a></li>
+            </ul>
         </div>
         <div class="locations-container">
             {% for clock in clocks %}
@@ -65,7 +77,8 @@
                         </div>
                     </div>
                     <form method="POST" target="_self">
-                        <button type="submit" class="btn deleteBtn" name="deletePosition" value="{{forloop.counter0}}" id="deleteBtn-{{forloop.counter0}}-{{clock.area}}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn deleteBtn" name="position" value="{{forloop.counter0}}" id="deleteBtn-{{forloop.counter0}}-{{clock.area}}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-x-square" viewBox="0 0 16 16">
                                 <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
                                 <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>

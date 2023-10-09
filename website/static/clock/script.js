@@ -1,5 +1,7 @@
-const data_dict = JSON.parse(document.getElementById('userClocks').textContent);
-const savedTmeZones = getSavedTimeZones(data_dict);
+const clocksData_dict = JSON.parse(document.getElementById('userClocks').textContent);
+const timeZones = JSON.parse(document.getElementById('timeZones').textContent);
+
+const savedTmeZones = getSavedTimeZones(clocksData_dict);
 
 const degree = 6;
 const hr = document.getElementsByClassName('hour-hand');
@@ -31,7 +33,7 @@ setInterval(function() {
 // check if display search bar or not
 const searchBarElement = document.getElementById('addPlaceForm');
 var searchBarDisplay = false;
-if (data_dict["fields"]["clocks"].length >= 2) {
+if (clocksData_dict["fields"]["clocks"].length >= 2) {
     searchBarElement.className += ' d-none';
 } else {
     searchBarElement.classList.remove('d-none');
@@ -44,15 +46,27 @@ for (let clockHourNum of clockHourNums) {
     clockHourNum.style = "--i:" + clockHourNum.textContent;
 };
 
-function getSavedTimeZones(data_dict) {
-    if (data_dict == '') {
+function getSavedTimeZones(clocksData_dict) {
+    if (clocksData_dict == '') {
         return null;
     }
-    return data_dict["fields"]["clocks"].map(c => c["timeZone"]);
+    return clocksData_dict["fields"]["clocks"].map(c => c["timeZone"]);
 }
 
-function filterTimeZones(timeZonesList) {
-    console.log(timeZonesList);
+function filterTimeZones(btnId) {
+    console.log(btnId);
+    var input = document.getElementById(btnId).value;
+    console.log(input);
+    generateTimeZonesTable();
+    controlDisplayTimeZone(input, timeZones);
+}
+
+function generateTimeZonesTable() {
+
+}
+
+function controlDisplayTimeZone(input, timeZones) {
+
 }
 
 function updateLocation(btnId) {
@@ -61,6 +75,7 @@ function updateLocation(btnId) {
     document.getElementById(btnId).parentElement.replaceWith(updateLocationForm);
     const btnInfo = btnId.split('-');
     configUpdateLocationForm(updateLocationForm, btnInfo[1], btnInfo[2]);
+    document.getElementById('input-update-location-' + btnInfo[1]).focus();
     if (!searchBarDisplay) {
         searchBarElement.className += ' d-none';
     }
@@ -68,6 +83,7 @@ function updateLocation(btnId) {
 
 function configUpdateLocationForm(form, position, originalLocation) {
     form.id = 'update-location-form-' + originalLocation;
+    form.className += ' area';
 
     let btnPosition = document.createElement('input');
     btnPosition.setAttribute('name', 'position');
@@ -75,15 +91,12 @@ function configUpdateLocationForm(form, position, originalLocation) {
     btnPosition.setAttribute('type', 'hidden');
     form.appendChild(btnPosition);
 
-    let input = form.querySelector('#add-location-input');
+    let input = form.querySelector('#input-add-location');
     input.setAttribute('name', 'updateClock');
     input.setAttribute('placeholder', originalLocation);
+    input.id = 'input-update-location-' + position;
 
     let btn = form.querySelector('#addPlaceBtn');
     btn.textContent = 'Update';
-    btn.id = 'update-location-btn-' + originalLocation;
-}
-
-function deleteLocation(btnId) {
-    console.log(btnId)
+    btn.id = 'update-location-btn-' + position;
 }

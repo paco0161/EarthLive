@@ -37,20 +37,21 @@ def showUserClocks(request):
                 return render(request, 'clocks.html', {'userClocks': userClocksJson})
         elif request.method == "POST" and UpdateUserClocksForm(request.POST).is_valid():
             form = UpdateUserClocksForm(request.POST)
-            if form.is_valid() and form['deletePosition'] is None:
+            if form.is_valid():
                 UserClocks.updateClock(request, int(form.cleaned_data["position"]), TimeZones.getTimeZonesDict(form.cleaned_data["updateClock"]))
                 return redirect('showUserClocks')
         else:
             userClocks = UserClocks.getUserClocks(request=request)
-            timeZonesListJson = json.loads(serializers.serialize("json", TimeZones.objects.all(), fields=["area"]))
+            timeZonesJson = json.loads(serializers.serialize("json", TimeZones.objects.all(), fields=["area"]))
             if userClocks.count() >= 1:
                 userClocksJson = json.loads(serializers.serialize("json", userClocks, fields=["clocks"]))[0]
-                return render(request, 'clocks.html', {'userClocks': userClocksJson, 'timeZonesList': timeZonesListJson})
+                return render(request, 'clocks.html', {'userClocks': userClocksJson, 'timeZones': timeZonesJson})
             else:
                 messages.info(request, "Currently you don't have any saved World Time Clocks. Please add one or more.")
-                return render(request, 'clocks.html', {'timeZonesList': timeZonesListJson})
+                return render(request, 'clocks.html', {'timeZones': timeZonesJson})
     else:
         return redirect('home')
+
 
 def logout_user(request):
     logout(request)
