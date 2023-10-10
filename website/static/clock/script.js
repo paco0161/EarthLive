@@ -91,7 +91,7 @@ function configUpdateLocationForm(form, position, originalLocation) {
     btnPosition.setAttribute('type', 'hidden');
     form.appendChild(btnPosition);
 
-    let input = form.querySelector('#input-add-location');
+    let input = form.querySelector('#autoComplete');
     input.setAttribute('name', 'updateClock');
     input.setAttribute('placeholder', originalLocation);
     input.id = 'input-update-location-' + position;

@@ -26,7 +26,6 @@ class UserClocks(models.Model):
         return UserClocks.getUserClocks(request)[0].clocks if UserClocks.getUserClocks(request).count() >= 1 else []
     
     def addClock(request, timeZone, currentClockList):  
-        # if timeZone not in currentClockList:
         currentClockList.append(timeZone)
         obj, created = UserClocks.objects.update_or_create(username=request.user.get_username(), defaults={"clocks":currentClockList})
         return obj

@@ -21,20 +21,18 @@
         <div class="col-md-4 offset-md-4">
             <form class="d-flex form" id="addPlaceForm" role="search" method="POST" target="_self">
                 {% csrf_token %}
-                    <input class="form-control" onkeyup="filterTimeZones(this.id)" type="search" name="clock" id="input-add-location" placeholder="Search.." aria-label="Search">
+                    <input id="autoComplete" type="search" dir="ltr" spellcheck=true autocorrect="off" autocomplete="off" autocapitalize="off" maxlength="2048" tabindex="1" class="form-control" onkeyup="filterTimeZones(this.id)" name="clock" placeholder="Search.." aria-label="Search">
                     <button class="btn btn-outline-success" type="submit" id="addPlaceBtn">Add</button>
             </form>
-            <ul>
-                <li><a href="#">Adele</a></li>
-                <li><a href="#">Agnes</a></li>
-
-                <li><a href="#">Billy</a></li>
-                <li><a href="#">Bob</a></li>
-
-                <li><a href="#">Calvin</a></li>
-                <li><a href="#">Christina</a></li>
-                <li><a href="#">Cindy</a></li>
-            </ul>
+            <!-- <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true">
+              Dropdown
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul> -->
         </div>
         <div class="locations-container">
             {% for clock in clocks %}
