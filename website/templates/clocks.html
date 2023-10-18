@@ -2,21 +2,21 @@
 {% load static %}
 
 {% block extrahead %}
-<link rel="stylesheet" href="{% static 'clock/style.css' %}">
+<link rel="stylesheet" href="{% static 'style/clocks.css' %}">
 {% endblock %}
 
 {% block scripts%}
-{{ userClocks|json_script:"userClocks"}}
+{{ userClock|json_script:"userClock"}}
 {{ timeZones|json_script:"timeZones"}}
-<script src="{% static 'clock/script.js' %}" ></script>
+<script src="{% static 'bundle.js' %}" ></script>
 {% endblock %}
 
 
 {% block content %}
-<!-- <div class="area">Count: {{ userClocks.fields.clocks | length }} </div> -->
+<!-- <div class="area">Count: {{ userClock.fields.clocks | length }} </div> -->
 
 {% if user.is_authenticated %}
-    {% with clocks=userClocks.fields.clocks count=userClocks.fields.clocks|length %}
+    {% with clocks=userClock.fields.clocks count=userClock.fields.clocks|length %}
         <br>
         <div class="col-md-4 offset-md-4">
             <form class="d-flex form" id="addPlaceForm" role="search" method="POST" target="_self">

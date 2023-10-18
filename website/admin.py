@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import UserClocks, TimeZones
+from .models import UserClock, TimeZone
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
@@ -7,10 +7,10 @@ from import_export.admin import ImportExportModelAdmin
 
 class TimeZonesResource(resources.ModelResource):
     class Meta:
-        model = TimeZones
+        model = TimeZone
     
 class TimeZonesAdmin(ImportExportModelAdmin):
     resource_class = TimeZonesResource
 
-mymodels = [UserClocks, TimeZones]
+mymodels = [UserClock, TimeZone]
 admin.site.register(mymodels, TimeZonesAdmin)

@@ -1,6 +1,7 @@
 #Ignore all files inside virtual environment directory
 venv/
 virt/
+node_modules/
 
 #Ignore pycache
 __pycache__/

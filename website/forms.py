@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
-from .models import UserClocks
+from .models import UserClock
 import json
 
 class SignUpForm(UserCreationForm):
@@ -31,15 +31,15 @@ class SignUpForm(UserCreationForm):
         self.fields['password2'].widget.attrs['placeholder'] = 'Confirm Password'
         self.fields['password2'].help_text = '<span class="form-text text-muted"><small>Enter the same password as before, for verification.</small></span>'
 
-class AddUserClocksForm(forms.Form):
+class AddUserClockForm(forms.Form):
     clock = forms.CharField(max_length=200)
     
     class Meta:
-        model = UserClocks
+        model = UserClock
 
-class UpdateUserClocksForm(forms.Form):
+class UpdateUserClockForm(forms.Form):
     position = forms.CharField(max_length=200)
     updateClock = forms.CharField(max_length=200, required=False)
    
     class Meta:
-        model = UserClocks
+        model = UserClock

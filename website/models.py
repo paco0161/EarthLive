@@ -2,7 +2,7 @@ from typing import Any
 from django.db import models
 
 # Create your models here.
-class UserClocks(models.Model):
+class UserClock(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     username = models.CharField(max_length=50, unique=True)
@@ -19,30 +19,33 @@ class UserClocks(models.Model):
     clockAddress_2_TimeZone = models.CharField(max_length=30, null=True)
     clockAddress_2_UTC_Offset = models.CharField(max_length=10, null=True)
 
-    def getUserClocks(request):
-        return UserClocks.objects.filter(username=request.user.get_username())
+    def getUserClock(request):
+        return UserClock.objects.filter(username=request.user.get_username())
     
     def getClockList(request):
-        return UserClocks.getUserClocks(request)[0].clocks if UserClocks.getUserClocks(request).count() >= 1 else []
+        return UserClock.getUserClock(request)[0].clocks if UserClock.getUserClock(request).count() >= 1 else []
     
     def addClock(request, timeZone, currentClockList):  
         currentClockList.append(timeZone)
-        obj, created = UserClocks.objects.update_or_create(username=request.user.get_username(), defaults={"clocks":currentClockList})
+        obj, created = UserClock.objects.update_or_create(username=request.user.get_username(), defaults={"clocks":currentClockList})
         return obj
         
     def updateClock(request, position, updateTo):
-        currentList = UserClocks.getUserClocks(request).values('clocks')[0]['clocks']
+        currentList = UserClock.getUserClock(request).values('clocks')[0]['clocks']
         if updateTo != '':
             currentList[position] = updateTo
         else:
             currentList.pop(position)
-        UserClocks.objects.filter(username=request.user.get_username()).update(clocks=currentList)
+        UserClock.objects.filter(username=request.user.get_username()).update(clocks=currentList)
         
 
-class TimeZones(models.Model):
+class TimeZone(models.Model):
     continent =  models.CharField(max_length=50, null=True)
-    area = models.CharField(max_length=50, blank=True)
-    timeZone = models.CharField(max_length=50, unique=True)
+    area = models.CharField(max_length=150, blank=True)
+    time_zone = models.CharField(max_length=100)
+    abbreviation = models.CharField(max_length=50)
+    utc_offset = models.CharField(max_length=50)
+    country =  models.CharField(max_length=50, null=True)
 
-    def getTimeZonesDict(input):
-        return TimeZones.objects.filter(area__icontains=input).values('timeZone', 'area')[0] if input != '' else ''
+    def getTimeZoneDict(input):
+        return TimeZone.objects.filter(area__icontains=input).values('time_zone', 'area')[0] if input != '' else ''

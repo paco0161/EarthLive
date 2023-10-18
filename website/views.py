@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .forms import SignUpForm, AddUserClocksForm, UpdateUserClocksForm
-from .models import UserClocks, TimeZones
+from .forms import SignUpForm, AddUserClockForm, UpdateUserClockForm
+from .models import UserClock, TimeZone
 from django.core import serializers
 import json
 
@@ -16,36 +16,36 @@ def home(request):
         if user is not None:
             login(request, user)
             messages.success(request, "You have been logged in!")
-            return redirect('showUserClocks')
+            return redirect('showUserClock')
         else:
             messages.success(request, "Please try again, there is an error login...")
             return redirect('home')
     else:
         if (request.user.is_authenticated):
-            return redirect('showUserClocks')
+            return redirect('showUserClock')
         else:
             return render(request, 'home.html')
 
 
-def showUserClocks(request):
+def showUserClock(request):
     if (request.user.is_authenticated):
-        if request.method == "POST" and AddUserClocksForm(request.POST).is_valid():
-            form = AddUserClocksForm(request.POST)
+        if request.method == "POST" and AddUserClockForm(request.POST).is_valid():
+            form = AddUserClockForm(request.POST)
             if form.is_valid():
-                userClocks = UserClocks.addClock(request, TimeZones.getTimeZonesDict(form.cleaned_data["clock"]), UserClocks.getClockList(request=request))
-                userClocksJson = json.loads(serializers.serialize("json", [userClocks], fields=["clocks"]))[0]
-                return render(request, 'clocks.html', {'userClocks': userClocksJson})
-        elif request.method == "POST" and UpdateUserClocksForm(request.POST).is_valid():
-            form = UpdateUserClocksForm(request.POST)
+                userClock = UserClock.addClock(request, TimeZone.getTimeZoneDict(form.cleaned_data["clock"]), UserClock.getClockList(request=request))
+                userClockJson = json.loads(serializers.serialize("json", [userClock], fields=["clocks"]))[0]
+                return render(request, 'clocks.html', {'userClock': userClockJson})
+        elif request.method == "POST" and UpdateUserClockForm(request.POST).is_valid():
+            form = UpdateUserClockForm(request.POST)
             if form.is_valid():
-                UserClocks.updateClock(request, int(form.cleaned_data["position"]), TimeZones.getTimeZonesDict(form.cleaned_data["updateClock"]))
-                return redirect('showUserClocks')
+                UserClock.updateClock(request, int(form.cleaned_data["position"]), TimeZone.getTimeZoneDict(form.cleaned_data["updateClock"]))
+                return redirect('showUserClock')
         else:
-            userClocks = UserClocks.getUserClocks(request=request)
-            timeZonesJson = json.loads(serializers.serialize("json", TimeZones.objects.all(), fields=["area"]))
-            if userClocks.count() >= 1:
-                userClocksJson = json.loads(serializers.serialize("json", userClocks, fields=["clocks"]))[0]
-                return render(request, 'clocks.html', {'userClocks': userClocksJson, 'timeZones': timeZonesJson})
+            userClock = UserClock.getUserClock(request=request)
+            timeZonesJson = json.loads(serializers.serialize("json", TimeZone.objects.all(), fields=["area"]))
+            if userClock.count() >= 1:
+                userClockJson = json.loads(serializers.serialize("json", userClock, fields=["clocks"]))[0]
+                return render(request, 'clocks.html', {'userClock': userClockJson, 'timeZones': timeZonesJson})
             else:
                 messages.info(request, "Currently you don't have any saved World Time Clocks. Please add one or more.")
                 return render(request, 'clocks.html', {'timeZones': timeZonesJson})

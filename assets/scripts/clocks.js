@@ -1,4 +1,4 @@
-const clocksData_dict = JSON.parse(document.getElementById('userClocks').textContent);
+const clocksData_dict = JSON.parse(document.getElementById('userClock').textContent);
 const timeZones = JSON.parse(document.getElementById('timeZones').textContent);
 
 const savedTmeZones = getSavedTimeZones(clocksData_dict);
@@ -50,7 +50,7 @@ function getSavedTimeZones(clocksData_dict) {
     if (clocksData_dict == '') {
         return null;
     }
-    return clocksData_dict["fields"]["clocks"].map(c => c["timeZone"]);
+    return clocksData_dict["fields"]["clocks"].map(c => c["time_zone"]);
 }
 
 function filterTimeZones(btnId) {
@@ -80,6 +80,7 @@ function updateLocation(btnId) {
         searchBarElement.className += ' d-none';
     }
 }
+window.updateLocation = updateLocation;
 
 function configUpdateLocationForm(form, position, originalLocation) {
     form.id = 'update-location-form-' + originalLocation;
