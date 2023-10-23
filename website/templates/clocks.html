@@ -2,7 +2,8 @@
 {% load static %}
 
 {% block extrahead %}
-<link rel="stylesheet" href="{% static 'style/clocks.css' %}">
+<link rel="stylesheet" href="{% static 'style/autoComplete.css' %}">
+<link rel="stylesheet" href="{% static 'style/clock.css' %}">
 {% endblock %}
 
 {% block scripts%}
@@ -13,27 +14,17 @@
 
 
 {% block content %}
-<!-- <div class="area">Count: {{ userClock.fields.clocks | length }} </div> -->
-
 {% if user.is_authenticated %}
     {% with clocks=userClock.fields.clocks count=userClock.fields.clocks|length %}
         <br>
-        <div class="col-md-4 offset-md-4">
-            <form class="d-flex form" id="addPlaceForm" role="search" method="POST" target="_self">
+        <div class="search-bar">
+            <form class="form" id="addPlaceForm" role="search" method="POST" target="_self">
                 {% csrf_token %}
-                    <input id="autoComplete" type="search" dir="ltr" spellcheck=true autocorrect="off" autocomplete="off" autocapitalize="off" maxlength="2048" tabindex="1" class="form-control" onkeyup="filterTimeZones(this.id)" name="clock" placeholder="Search.." aria-label="Search">
+                    <input id="autoComplete" type="search" dir="ltr" spellcheck=false autocorrect="off" autocomplete="off" autocapitalize="off" maxlength="2048" tabindex="1" class="form-control" name="clock" placeholder="Search.." aria-label="Search">
                     <button class="btn btn-outline-success" type="submit" id="addPlaceBtn">Add</button>
             </form>
-            <!-- <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true">
-              Dropdown
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul> -->
         </div>
+        <main>
         <div class="locations-container">
             {% for clock in clocks %}
                 <div class="location">
@@ -61,6 +52,8 @@
                                 <div class="digital-minute">00</div>
                                 <div class="digital-second">00</div>
                             </div>
+
+                            <div class="digital-date"></div>
                     
                             <div class="area">
                                 <div class="area-name">{{clock.area}}
@@ -87,6 +80,7 @@
 
             {% endfor %}
         </div>
+        </main>
     {% endwith %}
 {% endif %}
 {% endblock %}

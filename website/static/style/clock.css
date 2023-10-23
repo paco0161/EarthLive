@@ -8,17 +8,28 @@
 :root {
     --main-location-size: 400px;
     --main-margin-top: 8%;
+    --item-row-gap: 4%;
+}
+
+.search-bar {
+    display: flex;
+    position: relative;
+    color: #444;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
 }
 
 .locations-container {
     display: flex;
     position: relative;
-    max-width: 100%;
     color: #444;
     width: 100%;
     justify-content: space-around;
     align-items: center;
     margin-top: var(--main-margin-top);
+    flex-wrap: wrap;
+    row-gap: 40px;
 }
 
 .location {
@@ -156,12 +167,19 @@
     }
 }
 
+.digital-date {
+    color: #151517;
+    position: relative;
+    display: flex;
+    font-size: 1.1em;
+    justify-content: center;
+    margin-top: calc(var(--main-margin-top)/2);
+    font-weight: bold;
+}
+
 .area {
-    text-align: center;
     font-size: 1.5em;
     font-weight: bold;
-    height: 100%;
-    width: 100%;
     margin-top: calc(var(--main-margin-top)/2);
     display: flex;
     justify-content: center;
@@ -170,3 +188,16 @@
 .area-name {
     padding-left: 12px;
 }
+
+/* :has(> .location) {
+    container-type: inline-size;
+}
+
+@container (max-width: 1000px) {
+    .locations-container {
+        flex-directon: column;
+    }
+    .location {
+        background: black;
+    }
+} */

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.db.models.query import EmptyQuerySet
 from .forms import SignUpForm, AddUserClockForm, UpdateUserClockForm
 from .models import UserClock, TimeZone
 from django.core import serializers
@@ -32,9 +33,12 @@ def showUserClock(request):
         if request.method == "POST" and AddUserClockForm(request.POST).is_valid():
             form = AddUserClockForm(request.POST)
             if form.is_valid():
-                userClock = UserClock.addClock(request, TimeZone.getTimeZoneDict(form.cleaned_data["clock"]), UserClock.getClockList(request=request))
-                userClockJson = json.loads(serializers.serialize("json", [userClock], fields=["clocks"]))[0]
-                return render(request, 'clocks.html', {'userClock': userClockJson})
+                clock = TimeZone.getTimeZoneDict(form.cleaned_data["clock"])
+                if isinstance(clock, EmptyQuerySet):
+                    messages.info(request, "Invalid Location. Please enter again!")
+                    return redirect('showUserClock') 
+                userClock = UserClock.addClock(request, clock, UserClock.getClockList(request=request))
+                return redirect('showUserClock')
         elif request.method == "POST" and UpdateUserClockForm(request.POST).is_valid():
             form = UpdateUserClockForm(request.POST)
             if form.is_valid():
