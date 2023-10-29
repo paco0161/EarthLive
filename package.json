@@ -3,7 +3,7 @@
     "@tarekraafat/autocomplete.js": "^10.2.7",
     "countries-and-timezones": "^3.5.1"
   },
-  "name": "worldtimeclock_python",
+  "name": "earthlive",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
