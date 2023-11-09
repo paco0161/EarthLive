@@ -10,5 +10,6 @@ local_settings.py
 db.sqlite3
 db.sqlite3-journal
 
-#Ignore vscode settings
+#Ignore vscode settings and env keys
 .vscode/
+.env
