@@ -9,7 +9,7 @@
 {% block scripts%}
 {{ userClock|json_script:"userClock"}}
 {{ timeZones|json_script:"timeZones"}}
-<script src="{% static 'bundle.js' %}" ></script>
+<script rel="stylesheet" src="{% static 'bundle.js' %}" ></script>
 {% endblock %}
 
 
