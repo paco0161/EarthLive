@@ -4,6 +4,8 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app']
 
+WSGI_APPLICATION = 'vercel_app.wsgi.app'
+
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
 # SECURE_SSL_REDIRECT = True
