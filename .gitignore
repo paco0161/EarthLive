@@ -13,3 +13,6 @@ db.sqlite3-journal
 #Ignore vscode settings and env keys
 .vscode/
 .env
+
+#Ignore staticfiles in collectstatic
+staticfiles/

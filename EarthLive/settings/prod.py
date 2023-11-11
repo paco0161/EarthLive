@@ -1,10 +1,13 @@
 from .base import *
+import os
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app']
+ALLOWED_HOSTS = ['.vercel.app']
 
 WSGI_APPLICATION = 'vercel_app.wsgi.app'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 

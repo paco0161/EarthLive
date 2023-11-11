@@ -3,6 +3,13 @@
         "src": "EarthLive/wsgi.py",
         "use": "@vercel/python",
         "config": { "maxLambdaSize": "15mb" }
+    },
+    {
+        "src": "build_files.sh",
+        "use": "@vercel/static-build",
+        "config": {
+            "distDir": "ui/staticfiles"
+        }
     }],
     "routes": [
         {
