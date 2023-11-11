@@ -14,5 +14,5 @@ db.sqlite3-journal
 .vscode/
 .env
 
-#Ignore staticfiles in collectstatic
-staticfiles/
+#Ignore staticfiles built in collectstatic
+**/staticfiles_build/static
