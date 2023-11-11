@@ -5,7 +5,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['.vercel.app']
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
 
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 

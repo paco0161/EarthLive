@@ -1,2 +1,2 @@
 pip install -r requirements.txt
-python manage.py collectstatic --noinput --settings=EarthLive.settings.prod
+python3.9 manage.py collectstatic --settings=EarthLive.settings.prod
