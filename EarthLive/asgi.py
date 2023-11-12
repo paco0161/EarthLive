@@ -8,9 +8,10 @@ https://docs.djangoproject.com/en/4.2/howto/deployment/asgi/
 """
 
 import os
+from decouple import config
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'EarthLive.settings.base')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', config('SETTINGS_ENVIRONMENT'))
 
 application = get_asgi_application()
