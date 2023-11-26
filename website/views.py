@@ -51,7 +51,7 @@ def showUserClock(request):
                 userClockJson = json.loads(serializers.serialize("json", userClock, fields=["clocks"]))[0]
                 return render(request, 'clocks.html', {'userClock': userClockJson, 'timeZones': timeZonesJson})
             else:
-                messages.info(request, "Currently you don't have any saved World Time Clocks. Please add one or more.")
+                messages.info(request, "Currently you haven't saved any clocks yet. Please try it out.")
                 return render(request, 'clocks.html', {'timeZones': timeZonesJson})
     else:
         return redirect('home')
