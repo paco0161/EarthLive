@@ -1,8 +1,5 @@
 import {getUserTimeZonesOrNull} from './dict-helper.js';
 
-export const userTimeZonesDict = JSON.parse(document.getElementById('userClock').textContent);
-const userTimeZones = getUserTimeZonesOrNull(userTimeZonesDict);
-
 const degree = 6;
 const hr = document.getElementsByClassName('hour-hand');
 const mn = document.getElementsByClassName('minute-hand');
@@ -13,7 +10,12 @@ const digitalSc = document.getElementsByClassName('digital-second');
 const digitalDate = document.getElementsByClassName('digital-date');
 const options = { weekday: 'short', day: 'numeric', month: 'short' };
 
-setInterval(function() {
+setInterval(fetchData, 1000)
+
+export function fetchData() {
+    console.log(document.getElementById('userClock').innerHTML);
+    var userTimeZonesDict = JSON.parse(document.getElementById('userClock').textContent);
+    var userTimeZones = getUserTimeZonesOrNull(userTimeZonesDict);
     if (userTimeZones !== null) {
         let day = userTimeZones.map(t => getTime(t));
         var tz = getTime(Intl.DateTimeFormat().resolvedOptions().timeZone);
@@ -34,8 +36,7 @@ setInterval(function() {
             digitalDate[index].textContent = date + " " + `(${showTimeDifference(getHoursDifference(tz.getTime(), value.getTime()))})`;
         });
     }
-}, 1000)
-
+}
 
 // format analog clock hour numbers
 const clockHourNums = document.getElementsByClassName('hourNumber');

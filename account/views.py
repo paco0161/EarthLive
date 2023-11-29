@@ -13,17 +13,17 @@ def login(request):
         if user is not None:
             login(request, user)
             messages.success(request, "You have been logged in!")
-            return redirect('showUserClock')
+            return redirect('user_clocks')
         else:
             messages.success(request, "Please try again, there is an error login...")
-            return redirect('home')
+            return redirect('login')
     else:
-        return render(request, 'home.html')
+        return render(request, 'login.html')
         
 def logout_user(request):
     logout(request)
     messages.success(request, "You have been logged out!")
-    return redirect('home')
+    return redirect('login')
 
 def register_user(request):
     if request.method == "POST":
@@ -37,7 +37,7 @@ def register_user(request):
             user = authenticate(username=username, password=password)
             login(request, user)
             messages.success(request, "You have sucessfully registered!")
-            return redirect('home')
+            return redirect('login')
         else:
             messages.success(request, " ".join([form.errors[key][0] for key in form.errors]))
             return render(request, 'register_user.html', {'form': form})

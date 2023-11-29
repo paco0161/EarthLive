@@ -1,5 +1,6 @@
 from typing import Any
 from django.db import models
+from datetime import datetime
 
 # Create your models here.
 class UserClock(models.Model):
@@ -21,14 +22,14 @@ class UserClock(models.Model):
 
     def getUserClock(request):
         return UserClock.objects.filter(username=request.user.get_username())
-    
+
     def getClockList(request):
         return UserClock.getUserClock(request)[0].clocks if UserClock.getUserClock(request).count() >= 1 else []
     
     def addClock(request, timeZone, currentClockList):
         currentClockList.append(timeZone)
         obj, created = UserClock.objects.update_or_create(username=request.user.get_username(), defaults={"clocks":currentClockList})
-        return obj
+        return timeZone
         
     def updateClock(request, position, updateTo):
         currentList = UserClock.getUserClock(request).values('clocks')[0]['clocks']

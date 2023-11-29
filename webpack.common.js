@@ -10,6 +10,6 @@ module.exports = {
     ],
     output: {
         filename: 'bundle.js',
-        path: path.resolve(__dirname, 'website', 'static')
+        path: path.resolve(__dirname, 'location', 'static')
     }
 }

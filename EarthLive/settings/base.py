@@ -35,10 +35,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'website',
+    'location',
+    'account',
     'import_export',
     'rest_framework',
+    'django_nextjs.apps.DjangoNextJSConfig',
 ]
+
+NEXTJS_SETTINGS = {
+    'nextjs_server_url': 'http://127.0.0.1:3000',
+}
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
