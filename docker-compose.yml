@@ -1,8 +1,43 @@
-version: '3.9'
+version: "3"
 
 services:
-  django:
-    image: django-docker:0.0.1
-    build: .
+  server:
+    container_name: server
+    build:
+      context: ./server
+    stdin_open: true
+    tty: true
+    working_dir: /src
     ports:
-      - "8080:8080"
+      - "8000:8000"
+    volumes:
+      - ./server:/src
+      - run_vol:/var/run
+      - cache_vol:/var/cache
+      - tmp_vol:/tmp
+    env_file:
+      - .env
+    command: >
+      sh -c "sh build_files.sh && python manage.py runserver 0.0.0.0:8000"
+    depends_on:
+      - db
+
+  db:
+    container_name: db
+    image: postgres
+    env_file:
+      - .env
+
+volumes:
+  run_vol:
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
+  cache_vol:
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
+  tmp_vol:
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
