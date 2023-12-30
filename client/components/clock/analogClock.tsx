@@ -21,14 +21,14 @@ const AnalogClock: FC<AnalogClockProps> = ({
   defaultTheme = 'neutral',
   defaultTimeZones = 'America/Toronto',
 }) => {
-  const [timing, isDaytime] = useClock(defaultTimeZones)
+  const [timing, currentTime, isDaytime] = useClock(defaultTimeZones)
   const [theme, updateTheme] = useTheme(defaultTheme)
   const [size, lastSize, updateSize] = useSize(defaultSize)
   
   const clockNumbers = Array.from({ length: 12 }, (_, i) => i + 1)
 
   return (
-    <div className="flex w-full flex-wrap items-center justify-center gap-x-40 gap-y-0">
+    <div className="flex w-full flex-wrap items-center justify-center gap-x-40 gap-y-0 mb-5">
       {/* <AnalogClockActions
         updateTheme={updateTheme}
         updateSize={updateSize}

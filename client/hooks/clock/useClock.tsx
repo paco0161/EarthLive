@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-type ClockHook = (timeZoneName: string) => [any, boolean]
+type ClockHook = (timeZoneName: string) => [any, any, boolean]
 
 const DEGREE = 6
 
@@ -50,7 +50,7 @@ const useClock: ClockHook = (timeZoneName) => {
     })
   }, [currentTime])
 
-  return [timing, isDaytime]
+  return [timing, currentTime, isDaytime]
 }
 
 export default useClock

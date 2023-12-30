@@ -4,6 +4,8 @@ import '@/styles/globals.css'
 import { webConfig } from '@/config/web'
 import NavBar from '@/components/nav-bar'
 import APIProvider from '@/components/providers/api'
+import { Suspense } from 'react'
+import Loading from './loading'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -22,7 +24,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <APIProvider>
           <NavBar />
-          <div>{children}</div>
+            <div>{children}</div>
         </APIProvider>
       </body>
     </html>
