@@ -2,7 +2,7 @@ import ClocksOverviewTemplate from '@/module/clock/template'
 
 export default function Home() {
   return (
-    <main className="h-[calc(100vh-120px)] w-full">
+    <main className="h-screen w-full">
       <ClocksOverviewTemplate userUuid={''}/>
     </main>
   )

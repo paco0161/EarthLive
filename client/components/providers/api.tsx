@@ -6,7 +6,13 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 import { ReactQueryStreamedHydration } from "@tanstack/react-query-next-experimental"
 
 function APIProvider({ children }: React.PropsWithChildren) {
-  const [client] = React.useState(new QueryClient())
+  const [client] = React.useState(new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: 0,
+      },
+    },
+  }))
 
   return (
     <QueryClientProvider client={client}>

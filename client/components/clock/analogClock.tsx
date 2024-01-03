@@ -1,4 +1,4 @@
-'use client'
+"use client"
 import { FC } from 'react'
 
 // import AnalogClockActions from './clock-actions'
@@ -28,7 +28,7 @@ const AnalogClock: FC<AnalogClockProps> = ({
   const clockNumbers = Array.from({ length: 12 }, (_, i) => i + 1)
 
   return (
-    <div className="flex w-full flex-wrap items-center justify-center gap-x-40 gap-y-0 mb-5">
+    <div className="flex w-full flex-wrap items-center justify-center mb-6">
       {/* <AnalogClockActions
         updateTheme={updateTheme}
         updateSize={updateSize}
@@ -78,8 +78,6 @@ const AnalogClock: FC<AnalogClockProps> = ({
             ></span>
           </section>
         </div>
-
-
       </div>
     </div>
   )
