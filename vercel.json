@@ -1,7 +1,7 @@
 {
     "version": 2,
     "builds": [{
-        "src": "EarthLive/wsgi.py",
+        "src": "server/EarthLive/wsgi.py",
         "use": "@vercel/python",
         "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
     },
@@ -9,7 +9,7 @@
         "src": "build_files.sh",
         "use": "@vercel/static-build",
         "config": {
-            "distDir": "EarthLive/staticfiles_build"
+            "distDir": "server/EarthLive/staticfiles_build"
         }
     }],
     "routes": [
@@ -19,7 +19,7 @@
         },
         {
             "src": "/(.*)",
-            "dest": "EarthLive/wsgi.py"
+            "dest": "server/EarthLive/wsgi.py"
         }
     ]
 }

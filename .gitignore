@@ -1,18 +1,49 @@
-#Ignore all files inside virtual environment directory
-venv/
-virt/
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
 node_modules/
+/.pnp
+.pnp.js
+.yarn/install-state.gz
 
-#Ignore pycache
-__pycache__/
-*.log
-local_settings.py
-db.sqlite3
-db.sqlite3-journal
+# testing
+/coverage
 
-#Ignore vscode settings and env keys
-.vscode/
+# next.js
+.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# local env files
+.env*.local
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+.vercel
+
+# Supabase
+.branches
+.temp
 .env
+supabase.code-workspace
+.vscode/
 
-#Ignore staticfiles built in collectstatic
-**/staticfiles_build/static
+__pycache__/
+migrations/
+staticfiles_build/
