@@ -2,8 +2,8 @@
 
 import useGetUserClock from "@/hooks/api/useGetUserClock"
 import React, { Suspense } from "react"
-import AnalogClock from "@/components/clock/analogClock"
-import Description from "@/components/clock/description"
+import AnalogClock from "@/components/clock/analog-clock"
+import LocationDescription from "@/components/clock/location-description"
 import Delete from "@/components/icons/delete"
 import { toKeyByIndex } from "@/lib/utils"
 
@@ -30,7 +30,7 @@ const ClocksOverviewTemplate: React.FunctionComponent<
                                     key={toKeyByIndex("analogClock", index) + clock.time_zone}
                                     defaultTimeZones={clock.time_zone}
                                     />
-                                    <Description
+                                    <LocationDescription
                                     key={toKeyByIndex("description", index) + clock.area}
                                     timeZone={clock.time_zone}
                                     area={clock.area}/>

@@ -4,7 +4,7 @@ import '@/styles/globals.css'
 import Head from 'next/head'
 import { webConfig } from '@/config/web'
 import NavBar from '@/components/nav-bar'
-import APIProvider from '@/components/providers/api'
+import APIQueryProvider from '@/components/providers/api-query-provider'
 import { Suspense } from 'react'
 import Loading from './loading'
 
@@ -27,10 +27,12 @@ export default function RootLayout({
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
         </head>
         <body className="flex flex-col h-screen">
-          <APIProvider>
+          <APIQueryProvider>
             <NavBar />
-              {children}
-          </APIProvider>
+              <main className="h-screen w-full">
+                {children}
+              </main>
+          </APIQueryProvider>
         </body>
       </html>
     </>
