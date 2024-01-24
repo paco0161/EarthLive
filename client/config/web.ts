@@ -4,6 +4,12 @@ export const webConfig = {
     page: {
         main: {
             href: "/"
+        },
+        signIn: {
+            href: "/auth/sign-in"
+        },
+        signUp: {
+            href: "/auth/sign-up"
         }
     }
 }

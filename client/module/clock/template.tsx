@@ -2,8 +2,8 @@
 
 import useGetUserClock from "@/hooks/api/useGetUserClock"
 import React, { Suspense } from "react"
-import AnalogClock from "@/components/clock/analog-clock"
-import LocationDescription from "@/components/clock/location-description"
+import AnalogClock from "@/components/clocks/analog-clock"
+import LocationDescription from "@/components/clocks/location-description"
 import Delete from "@/components/icons/delete"
 import { toKeyByIndex } from "@/lib/utils"
 
@@ -15,14 +15,15 @@ const ClocksOverviewTemplate: React.FunctionComponent<
   ClocksOverviewTemplateProps
 > = ({ userUuid }: { userUuid: string }) => {
     const { data } = useGetUserClock(userUuid)
-    const clockList = data !== undefined ? data.userClock[0].clocks : []
+    console.log(data)
+    const clockList = data
 
     return (
         <>
         <Suspense fallback={<h2 className="bg-green-500">🌀 Loading...</h2>}>
             {(
                 <div className="w-full relative text-gray-500 h-full flex flex-wrap justify-evenly items-center text-center">
-                    {clockList.map((clock: { time_zone: string ; area: string }, index: number) => {
+                    {/* {clockList.map((clock: { time_zone: string ; area: string }, index: number) => {
                         return (
                             <div className="flex" key={toKeyByIndex("location", index) + clock.time_zone}>
                                 <div key={clock.time_zone}>
@@ -41,7 +42,7 @@ const ClocksOverviewTemplate: React.FunctionComponent<
                                 </form>
                             </div>
                         )
-                    })}
+                    })} */}
                 </div>
             )}
         </Suspense>
