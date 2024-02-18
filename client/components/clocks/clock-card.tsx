@@ -1,7 +1,7 @@
 import { toKeyByIndex } from "@/lib/utils"
 import { FC } from "react"
 import AnalogClock from "./analog-clock"
-import Delete from "../icons/delete"
+import Delete from "../ui/delete"
 import LocationDescription from "./location-description"
 
 interface ClockProps {
