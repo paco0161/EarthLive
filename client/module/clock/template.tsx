@@ -1,51 +1,34 @@
 "use client"
 
+import React from "react"
 import useGetUserClock from "@/hooks/api/useGetUserClock"
-import React, { Suspense } from "react"
-import AnalogClock from "@/components/clocks/analog-clock"
-import LocationDescription from "@/components/clocks/location-description"
-import Delete from "@/components/icons/delete"
-import { toKeyByIndex } from "@/lib/utils"
+import ClockCard from "@/components/clocks/clock-card"
+import useUserStore from "@/hooks/state/user/useUserStore"
 
 interface ClocksOverviewTemplateProps {
-    userUuid: string
+
 }
 
 const ClocksOverviewTemplate: React.FunctionComponent<
   ClocksOverviewTemplateProps
-> = ({ userUuid }: { userUuid: string }) => {
-    const { data } = useGetUserClock(userUuid)
-    console.log(data)
-    const clockList = data
-
+> = () => {
+    const userUuid = useUserStore((state) => state.uuid)
+    const { data: userClockList, isLoading} = useGetUserClock(userUuid as string)
     return (
         <>
-        <Suspense fallback={<h2 className="bg-green-500">🌀 Loading...</h2>}>
-            {(
-                <div className="w-full relative text-gray-500 h-full flex flex-wrap justify-evenly items-center text-center">
-                    {/* {clockList.map((clock: { time_zone: string ; area: string }, index: number) => {
-                        return (
-                            <div className="flex" key={toKeyByIndex("location", index) + clock.time_zone}>
-                                <div key={clock.time_zone}>
-                                    <AnalogClock
-                                    key={toKeyByIndex("analogClock", index) + clock.time_zone}
-                                    defaultTimeZones={clock.time_zone}
-                                    />
-                                    <LocationDescription
-                                    key={toKeyByIndex("description", index) + clock.area}
-                                    timeZone={clock.time_zone}
-                                    area={clock.area}/>
-                                </div>
+            {!isLoading && userClockList && userClockList[0] && 
+                (<div className="w-full relative text-gray-500 h-full flex flex-wrap justify-evenly items-center text-center">
+                    {userClockList[0]!.clocks instanceof Array && userClockList[0]!.clocks.map((clock, index, ) => (
+                        <ClockCard 
+                            key={index}
+                            index={index}
+                            timezone={clock!.time_zone}
+                            area={clock!.area}
+                        />
+                    ))}
 
-                                <form>
-                                    <Delete />
-                                </form>
-                            </div>
-                        )
-                    })} */}
-                </div>
-            )}
-        </Suspense>
+                </div>)
+            }
         </>
     )
 }

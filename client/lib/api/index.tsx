@@ -1,34 +1,59 @@
 import { IEmailPasswordSiginIn } from "../type/IEmailPasswordSignIn"
 import { IEmailPasswordSiginUp } from "../type/IEmailPasswordSignUp"
-import { ITimezonesResponse } from "../type/api/response/timezones"
+import { IUpdateUserClockListRequest } from "../type/IUpdateUserClockListRequest"
 import { supabase } from "../utils"
 
-export const getClockList = async () => {
-    // Instead of the file system,
-    // fetch post data from an external API endpoint
+export const getUserClockList = async (userUuid: string) => {
     try {
-        let { data: timezones, error } = await supabase
-        .from('timezones')
-        .select('*')
-        
+        let { data: clocks, error } = await supabase
+        .from('user_clocks')
+        .select('clocks')
+        .eq('uuid', userUuid)
     
         if (error) {
           throw error
         }
-        return timezones
+
+        return clocks
       } catch (error) {
         throw error
     }
 }
 
-export const deleteClockList = async () => {
-    // Instead of the file system,
-    // fetch post data from an external API endpoint
-    const res = await fetch('http://127.0.0.1:8000/api/location/')
-    if (!res.ok) {
-        throw new Error('Network response was not ok')
+export const getTimeZoneList = async () => {
+  try {
+      let { data: timezones, error } = await supabase
+      .from('timezones')
+      .select('*')
+
+      console.log(timezones)
+  
+      if (error) {
+        throw error
+      }
+      return timezones
+    } catch (error) {
+      throw error
+  }
+}
+
+export const updateClockList = async (req: IUpdateUserClockListRequest) => {
+  try {
+    let { data: clocks, error } = await supabase
+    .from('user_clocks')
+    .update({
+      clocks : req.clocks
+    })
+    .eq('uuid', req.userUUID)
+
+    if (error) {
+      throw error
     }
-    return res.json()
+
+    return clocks
+  } catch (error) {
+    throw error
+  }
 }
 
 

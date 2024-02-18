@@ -5,8 +5,10 @@ import Head from 'next/head'
 import { webConfig } from '@/config/web'
 import NavBar from '@/components/nav-bar'
 import APIQueryProvider from '@/components/providers/api-query-provider'
-import { Suspense } from 'react'
-import Loading from './loading'
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
+import { cookies } from 'next/headers'
+import { Database } from '@/lib/type/supabase'
+import AuthProvider from '@/components/providers/auth-provider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -15,11 +17,19 @@ export const metadata: Metadata = {
   description: webConfig.description
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const supabase = createServerComponentClient<Database>({ cookies })
+
+  const {
+    data: { session },
+  } = await supabase.auth.getSession()
+
+  const accessToken = session?.access_token || null
+
   return (
     <>
       <html lang="en">
@@ -28,10 +38,12 @@ export default function RootLayout({
         </head>
         <body className="flex flex-col h-screen">
           <APIQueryProvider>
-            <NavBar />
-              <main className="h-screen w-full">
-                {children}
-              </main>
+            <AuthProvider accessToken={accessToken}>
+              <NavBar />
+                <main className="h-screen w-full">
+                  {children}
+                </main>
+            </AuthProvider>
           </APIQueryProvider>
         </body>
       </html>

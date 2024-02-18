@@ -1,5 +1,6 @@
 enum QueryKeyString {
-    USER_CLOCK = "user-clock",
+    USER_CLOCK = "user_clock",
+    TIMEZONE = "timezone"
   }
   
 export { QueryKeyString }

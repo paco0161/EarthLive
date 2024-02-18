@@ -2,11 +2,11 @@
 import { useCallback, useEffect, useState } from 'react'
 import { Session, createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { Database } from '@/lib/type/supabase'
-import Avatar from '@/app/account/avatar'
 import { FormProvider, useForm } from 'react-hook-form'
 import { updateProfileFormSchema } from '@/module/auth/validations/update-profile'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import Avatar from '@/app/profile/avatar'
 
 export default function AccountForm({ session }: { session: Session | null }) {
   const supabase = createClientComponentClient<Database>()
